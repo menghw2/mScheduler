@@ -39,7 +39,7 @@ public class ScheduledAnnoInterceptor {
         //目标方法
         String targetMethodName = pjoinPoint.getTarget().getClass().getName()
                 + "." + pjoinPoint.getSignature().getName();
-        //先获取本地锁
+        //先获取本地方法锁
         MSLocalLock.lock(targetMethodName);
         //获取全局锁
         LockStatus globalLock = null;
@@ -62,7 +62,7 @@ public class ScheduledAnnoInterceptor {
             if(globalLock == LockStatus.LOCK_FI){
                 lockedDataInfo.setCanStartTryRelease(true);
             }
-            //释放本地锁
+            //释放本地方法锁
             MSLocalLock.unLock(targetMethodName);
         }
         return result;

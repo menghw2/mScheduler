@@ -61,7 +61,7 @@ public class QuartzSchedulerInterceptor {
                         String targetMethod = oriInvoker.getTargetClass().getName() + "." + oriInvoker.getTargetMethod();
                         //加锁实体
                         LockedDataInfo lockedDataInfo = new LockedDataInfo(targetMethod);
-                        //先获取本地锁
+                        //获本地方法锁
                         MSLocalLock.lock(targetMethod);
                         VAR_METHOD.set(targetMethod);
                         //全局锁加锁是否成功
@@ -97,7 +97,7 @@ public class QuartzSchedulerInterceptor {
                         VAR_GLOCK.remove();
                         VAR_LDINFO.remove();
 
-                        //释放本地锁
+                        //释放本地方法锁
                         MSLocalLock.unLock(VAR_METHOD.get());
                         VAR_METHOD.remove();
                     }
