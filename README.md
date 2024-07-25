@@ -2,6 +2,7 @@
 提供集群环境中负载均衡的定时任务，支持基于Spring管理的quartz、@Scheduled的定时任务，详见配置说明。
 
 # 配置说明
+ ``` yml
   mScheduler:
     #策略sticky、random
     #sticky：先占先得一直占用，直到应用停止 【默认】
@@ -14,8 +15,10 @@
     #数据存储方式为db是使用，当有多个数据源时可能需要指定；
     #不指定的话优先匹配动态数据源没有的话再使用任意一个
     #dbSourceBeanName: masterDataSource
+ ```
 
 # 用法
+  ```java
   @Import(MSchedulerConfiguration.class)
   @SpringBootApplication
   public class MyApplication {
@@ -23,3 +26,4 @@
          //...
       }
   }
+  ```
