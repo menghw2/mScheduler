@@ -5,8 +5,8 @@
  ``` yml
   mScheduler:
     #策略sticky、random
-    #sticky：先占先得一直占用，直到应用停止 【默认】
-    #random：随机，对一天多次的任务可能有效果，否则的话可能就是一直都是那个时钟靠前的一直抢占到执行权
+    #sticky：先占先得一直占用，直到应用停止或重启 【默认】
+    #random：随机，对于一天多次执行的任务可能有效果，否则的话可能就是一直都是那个时钟靠前的服务器一直抢占到执行权
     strategy: sticky
     #占用时长 【默认1800s】，超过这个时间释放占用，对sticky策略的无效
     lock-time-secs: 1800
@@ -18,6 +18,15 @@
  ```
 
 # 用法
+### maven引入依赖
+  ```xml
+  <dependency>
+       <groupId>name.menghw</groupId>
+       <artifactId>mScheduler</artifactId>
+       <version>1.0</version>
+  </dependency>
+  ```
+### 启动类上导入
   ```java
   @Import(MSchedulerConfiguration.class)
   @SpringBootApplication
